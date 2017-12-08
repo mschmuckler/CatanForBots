@@ -2,7 +2,7 @@ const Tile = require('./tile.js')
 
 module.exports = class Board {
   constructor() {
-    this.tiles = [];
+    this.tiles = {};
   }
   
   generateTiles() {
@@ -19,22 +19,18 @@ module.exports = class Board {
     ];  
     let tempResource, tempDiceNum;
     
-    while (resources[0] || diceNums[0]) {
+    for (let i = 0; i < 18; i++) {
       tempResource = Math.round(Math.random() * (resources.length - 1));
       tempDiceNum = Math.round(Math.random() * (diceNums.length - 1));
       
-      this.tiles.push(
-        new Tile(resources[tempResource], diceNums[tempDiceNum])
-      );
+      this.tiles[i] = new Tile(resources[tempResource], diceNums[tempDiceNum]);
       
       resources = resources.slice(0, tempResource).concat(resources.slice(tempResource + 1));
       diceNums = diceNums.slice(0, tempResource).concat(diceNums.slice(tempResource + 1));
     }
     
     // desert tile always last, need to fix
-    this.tiles.push(
-      new Tile('des', 7)
-    );
+    this.tiles[18] = new Tile('des', 7);
   }
   
   // call after creating Tiles
@@ -65,7 +61,7 @@ module.exports = class Board {
     const fourthRow = [12, 13, 14, 15];
     const fifthRow = [16, 17, 18];
     
-    for (let i = 0; i < this.tiles.length; i++) {
+    for (let i = 0; i < 19; i++) {
       if (!westNulls.includes(i)) {
         this.tiles[i].neighbors.w = this.tiles[i - 1];
       }

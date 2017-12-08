@@ -1,7 +1,7 @@
 const Board = require('./board.js');
 
 class Game {
-  constructor(...players) {
+  constructor(...players) { 
     this.board = new Board();
     this.players = players
   }
@@ -9,10 +9,6 @@ class Game {
   setupBoard() {
     this.board.generateTiles();
     this.board.connectNeighborTiles();
-  }
-
-  placeSettlement(player, tile, corner) {
-    tile.corners[corner] = { settlement: player };
   }
 
   setupInitialSettlements() {
@@ -29,4 +25,4 @@ class Game {
 temp = new Game('msm', 'lat', 'xor', 'pyt')
 temp.setupBoard();
 temp.setupInitialSettlements();
-console.log(temp.board.tiles);
+// console.log(temp.board.tiles[16].neighbors);

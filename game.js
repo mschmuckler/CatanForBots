@@ -20,9 +20,8 @@ class Game {
     }  
   }
 }
-// game.js - END
 
 temp = new Game('msm', 'lat', 'xor', 'pyt')
 temp.setupBoard();
-temp.setupInitialSettlements();
-// console.log(temp.board.tiles[16].neighbors);
+// temp.setupInitialSettlements();
+console.log(temp.board);

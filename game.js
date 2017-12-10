@@ -52,6 +52,8 @@ class Game {
   
   rollDiceAndDistributeResources(){} // Need to implement
   
+  checkForVictory(){} // Need to implement
+  
   mainGameLoop() {
     let playerHasWon = false;
   

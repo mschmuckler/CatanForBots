@@ -7,11 +7,11 @@ module.exports = class Board {
   
   generateTiles() {
     let resources = [
-      'sh', 'sh', 'sh', 'sh',
-      'lu', 'lu', 'lu', 'lu',
-      'wh', 'wh', 'wh', 'wh',
-      'br', 'br', 'br',
-      'o', 'o', 'o',
+      'sheep', 'sheep', 'sheep', 'sheep',
+      'lumber', 'lumber', 'lumber', 'lumber',
+      'wheat', 'wheat', 'wheat', 'wheat',
+      'brick', 'brick', 'brick',
+      'ore', 'ore', 'ore',
     ];
     let diceNums = [
       12, 11, 10, 9, 8, 6, 5, 4, 3, 2,
@@ -30,7 +30,7 @@ module.exports = class Board {
     }
     
     // desert tile always last, need to fix
-    this.tiles[18] = new Tile('des', 7);
+    this.tiles[18] = new Tile('desert', 7);
   }
   
   // call after creating Tiles

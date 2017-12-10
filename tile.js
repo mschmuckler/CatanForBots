@@ -18,7 +18,7 @@ module.exports = class Tile {
       sw: null,
       nw: null,
     };
-    this.roads = {
+    this.sides = {
       ne: null,
       e: null,
       se: null,

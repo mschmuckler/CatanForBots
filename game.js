@@ -14,16 +14,6 @@ class Game {
     this.board.connectNeighborTiles();
   }
 
-  setupInitialSettlements() {
-    for (let i = 0; i < this.players.length; i++) {
-      // this.players[i].placeInitialSettlement;
-    }
-    for (let i = this.players.length - 1; i >= 0; i--) {
-      // this.players[i].placeInitialSettlement;
-    }
-    
-    // Distribute initial resources
-  }
   
   currentPlayer() {
     return this.players[this.currentPlayerIndex];
@@ -48,6 +38,19 @@ class Game {
     this.currentPlayer().buyDevCardPhase(this);
     this.currentPlayer().buildingPhase(this);
   }
+  
+  setupInitialSettlements() {
+    for (let i = 0; i < this.players.length; i++) {
+      // this.players[i].placeInitialSettlement;
+    }
+    for (let i = this.players.length - 1; i >= 0; i--) {
+      // this.players[i].placeInitialSettlement;
+    }
+    
+    // Distribute initial resources
+  }
+  
+  rollDiceAndDistributeResources(){} // Need to implement
   
   mainGameLoop() {
     let playerHasWon = false;

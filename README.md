@@ -25,5 +25,6 @@
   - connectingSides()
 
 ## Secondary Concerns:
-  - Ports???
-  - Robber???
+  - Ports
+  - Robber
+  - Longest Road / Largest Army

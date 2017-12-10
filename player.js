@@ -6,7 +6,13 @@ const Utility = require('./utility.js')
 module.exports = class Player {
   constructor(name) {
     this.name = name;
-    this.hand = [];
+    this.hand = {
+      wheat: 0,
+      lumber: 0,
+      sheep: 0,
+      brick: 0,
+      ore: 0,
+    },
     this.structures = [];
     this.roads = [];
     this.revealedVP = 0;

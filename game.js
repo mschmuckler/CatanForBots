@@ -1,4 +1,5 @@
 const Board = require('./board.js');
+const Player = require('./player.js');
 
 class Game {
   constructor(...players) { 
@@ -69,7 +70,16 @@ class Game {
   }
 }
 
-temp = new Game('msm', 'lat', 'xor', 'pyt')
-temp.setupBoard();
-// temp.setupInitialSettlements();
-console.log(temp.board);
+const smartbot = new Player('Smartbot');
+const spitebot = new Player('Spitebot');
+const speckbot = new Player('Speckbot');
+const otherbot = new Player('Otherbot');
+game = new Game(smartbot, spitebot, speckbot, otherbot);
+game.setupBoard();
+smartbot.buildSettlement(game, 0, 'se');
+for (var i = 0; i < 19; i++) {
+  console.log(`${i}:`);
+  console.log(game.board.tiles[i]);
+  console.log(`===================`);
+  console.log(`===================`);
+}

@@ -1,16 +1,29 @@
+const Road = require('./road.js')
+const Settlement = require('./settlement.js')
+const City = require('./city.js')
+const Utility = require('./utility.js')
+
 module.exports = class Player {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.hand = [];
     this.structures = [];
     this.roads = [];
-    this.vp = 0;
+    this.revealedVP = 0;
+    this.hiddenVP = 0;
   }
 
-  buildRoad(){} // Default action, should be private and unalterable.
-  
-  buildSettlement(){} // Default action, should be private and unalterable.
+  buildSettlement(gameState, tileCoord, orientation) {
+    const settlement = new Settlement(this);
+    const selectedTile = gameState.board.tiles[tileCoord];
+    
+    selectedTile.corners[orientation] = settlement;
+    Utility.buildNeighboringCorners(settlement, selectedTile, orientation);
+  } // Default action, should be private and unalterable.
   
   buildCity(){} // Default action, should be private and unalterable.
+  
+  buildRoad(){} // Default action, should be private and unalterable.
   
   stealResource(){} // Default action, should be private and unalterable.
   

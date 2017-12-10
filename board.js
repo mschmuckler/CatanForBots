@@ -16,7 +16,7 @@ module.exports = class Board {
     let diceNums = [
       12, 11, 10, 9, 8, 6, 5, 4, 3, 2,
       11, 10, 9, 8, 6, 5, 4, 3,
-    ];  
+    ];
     let tempResource, tempDiceNum;
     
     for (let i = 0; i < 18; i++) {

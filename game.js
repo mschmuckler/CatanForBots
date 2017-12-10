@@ -17,8 +17,34 @@ class Game {
     }
     for (let i = this.players.length - 1; i >= 0; i--) {
       // this.players[i].placeInitialSettlement;
-    }  
+    }
+    
+    // Distribute initial resources
   }
+  
+  // mainGameLoop() {
+  //   let playerHasWon = false;
+  //   let currentPlayer = 0;
+  // 
+  //   this.setupBoard();
+  //   this.setupInitialSettlements();
+  // 
+  //   while(!playerHasWon) {
+  //     this.rollDiceAndDistributeResources();
+  //     this.players[currentPlayer].tradingPhase();
+  //     this.players[currentPlayer].playDevCardPhase();      
+  //     this.players[currentPlayer].buyDevCardPhase();      
+  //     this.players[currentPlayer].buildingPhase();
+  // 
+  //     playerHasWon = this.checkForVictory();
+  // 
+  //     if (currentPlayer === this.players.length - 1) {
+  //       currentPlayer = 0;
+  //     } else {
+  //       currentPlayer++;
+  //     }
+  //   }
+  // }
 }
 
 temp = new Game('msm', 'lat', 'xor', 'pyt')

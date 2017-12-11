@@ -1,6 +1,7 @@
 const Board = require('./board.js');
 const Player = require('./player.js');
 const Utility = require('./utility.js')
+const Rules = require('./rules.js')
 
 class Game {
   constructor(...players) {

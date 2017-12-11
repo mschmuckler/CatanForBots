@@ -1,4 +1,32 @@
 module.exports = {
+  oppositeOrientation: (orientation) => {
+    switch (orientation) {
+      case 'n':
+        return 's';
+      case 'ne':
+        return 'sw';
+      case 'e':
+        return 'w';
+      case 'se':
+        return 'nw';
+      case 's':
+        return 'n';
+      case 'sw':
+        return 'ne';
+      case 's':
+        return 'e';
+      case 'nw':
+        return 'se';
+    }
+  },
+
+  buildNeighboringSide: (road, selectedTile, orientation) => {
+    const neighbor = selectedTile.neighbors[orientation];
+    if (neighbor) {
+      neighbor.sides[module.exports.oppositeOrientation(orientation)] = road;
+    }
+  },
+
   buildNeighboringCorners: (structure, selectedTile, orientation) => {
     switch (orientation) {
       case 'n':

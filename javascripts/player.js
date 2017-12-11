@@ -50,16 +50,20 @@ module.exports = class Player {
   }
 
   buildSettlement(gameState, tileCoord, orientation) {
-    const settlement = new Settlement(this);
     const selectedTile = gameState.board.tiles[tileCoord];
-
+    const settlement = new Settlement(this);
     selectedTile.corners[orientation] = settlement;
     Utility.buildNeighboringCorners(settlement, selectedTile, orientation);
   } // Default action, should be private and unalterable.
 
   buildCity(){} // Default action, should be private and unalterable.
 
-  buildRoad(){} // Default action, should be private and unalterable.
+  buildRoad(gameState, tileCoord, orientation) {
+    const selectedTile = gameState.board.tiles[tileCoord];
+    const road = new Road(this);
+    selectedTile.sides[orientation] = road;
+    Utility.buildNeighboringSide(road, selectedTile, orientation);
+  } // Default action, should be private and unalterable.
 
   stealResource(){} // Default action, should be private and unalterable.
 

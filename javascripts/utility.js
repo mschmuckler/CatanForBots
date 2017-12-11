@@ -1,4 +1,42 @@
 module.exports = {
+  enoughResources: (player, item) => {
+    switch (item) {
+      case 'road':
+        return (player.hand.lumber >= 1 &&
+                player.hand.brick >= 1) ?
+                true : false
+      case 'settlement':
+        return (player.hand.lumber >= 1 &&
+                player.hand.brick >= 1 &&
+                player.hand.sheep >= 1 &&
+                player.hand.wheat >= 1) ?
+                true : false
+      case 'city':
+        return (player.hand.wheat >= 2 &&
+                player.hand.ore >= 3) ?
+                true : false
+      case 'devCard':
+        return (player.hand.wheat >= 1 &&
+                player.hand.ore >= 1 &&
+                player.hand.sheep >= 1) ?
+                true : false
+      default:
+        // Allows for custom checking in the form of a plain JS object,
+        // for ex. item -> { lumber: 2, sheep: 1 }
+        let result = true;
+        Object.keys(item).forEach(resource => {
+          if (player.hand[resource] < item[resource]) {
+            result = false;
+          }
+        });
+        return result;
+    }
+  }, // Player has enough resources to buy thing
+
+  connectingCorners: (corner)=>{}, // Returns all tile corners that connect
+
+  connectingSides: (side)=>{}, // Returns all tile sides that connect
+
   oppositeOrientation: (orientation) => {
     switch (orientation) {
       case 'n':

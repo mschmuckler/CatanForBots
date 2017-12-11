@@ -1,5 +1,19 @@
 const Settlement = require('./settlement.js');
 
+// Allows for negative indexing up to -2
+Object.defineProperty(Array.prototype, '-1', {
+  get() { return this[this.length - 1] },
+  set(val) { this[this.length - 1] = val },
+});
+Object.defineProperty(Array.prototype, '-2', {
+  get() { return this[this.length - 2] },
+  set(val) { this[this.length - 2] = val },
+});
+
+function wrapIndex(index) {
+  return (index > 5) ? index - 6 : index;
+}
+
 module.exports = {
   enoughResources: (player, item) => {
     switch (item) {
@@ -238,9 +252,32 @@ module.exports = {
         }
         return result;
     }
-  }, // Returns all tile corners that directly connect
+  },
 
-  adjacentSides: (side)=>{}, // Returns all tile sides that directly connect
+  adjacentSides: (selectedTile, orientation) => {
+    const allOrientations = ['ne', 'e', 'se', 'sw', 'w', 'nw'];
+    const result = [];
+    const index = allOrientations.indexOf(orientation);
+
+    const neighborOne = selectedTile.neighbors[allOrientations[index]];
+    const neighborTwo = selectedTile.neighbors[allOrientations[index - 1]];
+    const neighborThree = selectedTile.neighbors[allOrientations[wrapIndex(index + 1)]];
+
+    result.push(selectedTile.sides[allOrientations[index - 1]]);
+    result.push(selectedTile.sides[allOrientations[wrapIndex(index + 1)]]);
+    if (neighborOne) {
+      result.push(neighborOne.sides[allOrientations[index - 2]]);
+    } else if (neighborTwo) {
+      result.push(neighborTwo.sides[allOrientations[wrapIndex(index + 1)]]);
+    }
+    if (neighborOne) {
+      result.push(neighborOne.sides[allOrientations[wrapIndex(index + 2)]]);
+    } else if (neighborThree) {
+      result.push(neighborThree.sides[allOrientations[index - 1]]);
+    }
+
+    return result;
+  },
 
   oppositeOrientation: (orientation) => {
     switch (orientation) {

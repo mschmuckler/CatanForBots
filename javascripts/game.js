@@ -78,6 +78,7 @@ const speckbot = new Player('Speckbot');
 const otherbot = new Player('Otherbot');
 game = new Game(smartbot, spitebot, speckbot, otherbot);
 game.setupBoard();
+smartbot.addResources({ lumber: 1, sheep: 1, brick: 1, wheat: 1 });
 smartbot.buildSettlement(game, 0, 'se');
 smartbot.buildRoad(game, 0, 'se');
 smartbot.buildRoad(game, 3, 'e');

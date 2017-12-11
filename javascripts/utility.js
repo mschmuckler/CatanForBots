@@ -85,8 +85,8 @@ module.exports = {
             selectedTile.sides.e.owner === player) {
           result = true;
         }
-        if (selectedTile.sides.sw &&
-            selectedTile.sides.sw.owner === player) {
+        if (selectedTile.sides.se &&
+            selectedTile.sides.se.owner === player) {
           result = true;
         }
         if (selectedTile.neighbors.e &&
@@ -161,6 +161,14 @@ module.exports = {
         }
         return result;
     }
+  },
+
+  minimumCornerDistance: (selectedTile, orientation) => {
+    let result = true;
+    module.exports.adjacentCorners(selectedTile, orientation).forEach(corner => {
+      if (corner) { result = false }
+    });
+    return result;
   },
 
   adjacentCorners: (selectedTile, orientation) => {

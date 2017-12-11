@@ -19,7 +19,13 @@ module.exports = class Player {
     this.hiddenVP = 0;
   }
 
-  spendResources(item) {
+  addResources(item) {
+    Object.keys(item).forEach(resource => {
+      this.hand[resource] += item[resource];
+    });
+  }
+
+  subtractResources(item) {
     switch (item) {
       case 'road':
         this.hand.lumber -= 1;

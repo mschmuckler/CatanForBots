@@ -78,7 +78,7 @@ const speckbot = new Player('Speckbot');
 const otherbot = new Player('Otherbot');
 game = new Game(smartbot, spitebot, speckbot, otherbot);
 game.setupBoard();
-smartbot.buildSettlement(game, 0, 'se');
+smartbot.buildSettlement(game, 0, 'sw');
 for (var i = 0; i < 19; i++) {
   console.log(`${i}:`);
   console.log(game.board.tiles[i]);

@@ -33,9 +33,71 @@ module.exports = {
     }
   }, // Player has enough resources to buy thing
 
-  connectingCorners: (corner)=>{}, // Returns all tile corners that connect
+  emptySpace: (selectedTile, sidesOrCorners, orientation) => {
+    return !selectedTile[sidesOrCorners][orientation];
+  },
 
-  connectingSides: (side)=>{}, // Returns all tile sides that connect
+  adjacentCorners: (selectedTile, orientation) => {
+    const result = [];
+    switch (orientation) {
+      case 'n':
+        result.push(selectedTile.corners.nw);
+        result.push(selectedTile.corners.ne);
+        if (selectedTile.neighbors.nw) {
+          result.push(selectedTile.neighbors.nw.corners.ne);
+        } else if (selectedTile.neighbors.ne) {
+          result.push(selectedTile.neighbors.ne.corners.nw);
+        }
+        return result;
+      case 'ne':
+        result.push(selectedTile.corners.n);
+        result.push(selectedTile.corners.se);
+        if (selectedTile.neighbors.ne) {
+          result.push(selectedTile.neighbors.ne.corners.se);
+        } else if (selectedTile.neighbors.e) {
+          result.push(selectedTile.neighbors.e.corners.n);
+        }
+        return result;
+      case 'se':
+        result.push(selectedTile.corners.ne);
+        result.push(selectedTile.corners.s);
+        if (selectedTile.neighbors.e) {
+          result.push(selectedTile.neighbors.e.corners.s);
+        } else if (selectedTile.neighbors.se) {
+          result.push(selectedTile.neighbors.se.corners.ne);
+        }
+        return result;
+      case 's':
+        result.push(selectedTile.corners.se);
+        result.push(selectedTile.corners.sw);
+        if (selectedTile.neighbors.se) {
+          result.push(selectedTile.neighbors.se.corners.sw);
+        } else if (selectedTile.neighbors.sw) {
+          result.push(selectedTile.neighbors.sw.corners.se);
+        }
+        return result;
+      case 'sw':
+        result.push(selectedTile.corners.s);
+        result.push(selectedTile.corners.nw);
+        if (selectedTile.neighbors.sw) {
+          result.push(selectedTile.neighbors.sw.corners.nw);
+        } else if (selectedTile.neighbors.w) {
+          result.push(selectedTile.neighbors.w.corners.s);
+        }
+        return result;
+      case 'nw':
+        result.push(selectedTile.corners.sw);
+        result.push(selectedTile.corners.n);
+        if (selectedTile.neighbors.w) {
+          result.push(selectedTile.neighbors.w.corners.n);
+        } else if (selectedTile.neighbors.nw) {
+          result.push(selectedTile.neighbors.nw.corners.sw);
+        }
+        return result;
+    }
+  }, // Returns all tile corners that directly connect
+
+  adjacentSides: (side)=>{}, // Returns all tile sides that directly connect
 
   oppositeOrientation: (orientation) => {
     switch (orientation) {

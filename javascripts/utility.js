@@ -37,6 +37,132 @@ module.exports = {
     return !selectedTile[sidesOrCorners][orientation];
   },
 
+  cornerConnectsToRoad: (player, selectedTile, orientation) => {
+    let result = false;
+    switch (orientation) {
+      case 'n':
+        if (selectedTile.sides.nw &&
+            selectedTile.sides.nw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.ne &&
+            selectedTile.sides.ne.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.nw &&
+            selectedTile.neighbors.nw.sides.e &&
+            selectedTile.neighbors.nw.sides.e.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.ne &&
+            selectedTile.neighbors.ne.sides.w &&
+            selectedTile.neighbors.ne.sides.w.owner === player) {
+          result = true;
+        }
+        return result;
+      case 'ne':
+        if (selectedTile.sides.ne &&
+            selectedTile.sides.ne.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.e &&
+            selectedTile.sides.e.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.ne &&
+            selectedTile.neighbors.ne.sides.se &&
+            selectedTile.neighbors.ne.sides.se.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.e &&
+            selectedTile.neighbors.e.sides.nw &&
+            selectedTile.neighbors.e.sides.nw.owner === player) {
+          result = true;
+        }
+        return result;
+      case 'se':
+        if (selectedTile.sides.e &&
+            selectedTile.sides.e.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.sw &&
+            selectedTile.sides.sw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.e &&
+            selectedTile.neighbors.e.sides.sw &&
+            selectedTile.neighbors.e.sides.sw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.se &&
+            selectedTile.neighbors.se.sides.ne &&
+            selectedTile.neighbors.se.sides.ne.owner === player) {
+          result = true;
+        }
+        return result;
+      case 's':
+        if (selectedTile.sides.sw &&
+            selectedTile.sides.sw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.se &&
+            selectedTile.sides.se.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.se &&
+            selectedTile.neighbors.se.sides.w &&
+            selectedTile.neighbors.se.sides.w.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.sw &&
+            selectedTile.neighbors.sw.sides.e &&
+            selectedTile.neighbors.sw.sides.e.owner === player) {
+          result = true;
+        }
+        return result;
+      case 'sw':
+        if (selectedTile.sides.sw &&
+            selectedTile.sides.sw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.w &&
+            selectedTile.sides.w.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.sw &&
+            selectedTile.neighbors.sw.sides.nw &&
+            selectedTile.neighbors.sw.sides.nw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.w &&
+            selectedTile.neighbors.w.sides.se &&
+            selectedTile.neighbors.w.sides.se.owner === player) {
+          result = true;
+        }
+        return result;
+      case 'nw':
+        if (selectedTile.sides.w &&
+            selectedTile.sides.w.owner === player) {
+          result = true;
+        }
+        if (selectedTile.sides.nw &&
+            selectedTile.sides.nw.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.w &&
+            selectedTile.neighbors.w.sides.ne &&
+            selectedTile.neighbors.w.sides.ne.owner === player) {
+          result = true;
+        }
+        if (selectedTile.neighbors.nw &&
+            selectedTile.neighbors.nw.sides.sw &&
+            selectedTile.neighbors.nw.sides.sw.owner === player) {
+          result = true;
+        }
+        return result;
+    }
+  },
+
   adjacentCorners: (selectedTile, orientation) => {
     const result = [];
     switch (orientation) {

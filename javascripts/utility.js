@@ -1,3 +1,5 @@
+const Settlement = require('./settlement.js');
+
 module.exports = {
   enoughResources: (player, item) => {
     switch (item) {
@@ -35,6 +37,13 @@ module.exports = {
 
   emptySpace: (selectedTile, sidesOrCorners, orientation) => {
     return !selectedTile[sidesOrCorners][orientation];
+  },
+
+  settlementExists: (player, selectedTile, orientation) => {
+    selectedStructure = selectedTile.corners[orientation];
+    return !!(selectedStructure &&
+            selectedStructure instanceof Settlement &&
+            selectedStructure.owner === player);
   },
 
   cornerConnectsToRoad: (player, selectedTile, orientation) => {

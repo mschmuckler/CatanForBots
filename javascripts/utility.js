@@ -48,7 +48,7 @@ module.exports = {
         if (selectedTile.neighbors.nw) {
           selectedTile.neighbors.nw.corners.s = structure;
         }
-        break;      
+        break;
     }
   },
 };

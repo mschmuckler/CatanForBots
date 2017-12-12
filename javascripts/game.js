@@ -8,8 +8,6 @@ class Game {
     this.board = new Board();
     this.players = players;
     this.currentPlayerIndex = 0;
-    // otherPlayers is every other not-current player
-    this.otherPlayers = this.players.slice(1);
   }
 
   setupBoard() {
@@ -17,9 +15,12 @@ class Game {
     this.board.connectNeighborTiles();
   }
 
-
   currentPlayer() {
     return this.players[this.currentPlayerIndex];
+  }
+
+  otherPlayers() {
+    return this.players.slice(0, this.currentPlayerIndex).concat(this.players.slice(this.currentPlayerIndex + 1));
   }
 
   updateCurrentPlayerIndex() {
@@ -28,10 +29,6 @@ class Game {
     } else {
       this.currentPlayerIndex++;
     }
-  }
-
-  updateOtherPlayers() {
-    this.otherPlayers = this.players.slice(0, this.currentPlayerIndex).concat(this.players.slice(this.currentPlayerIndex + 1));
   }
 
   takeTurn() {
@@ -82,6 +79,8 @@ smartbot.addResources({ lumber: 1, sheep: 1, brick: 1, wheat: 1 });
 smartbot.buildSettlement(game, 0, 'se');
 smartbot.buildRoad(game, 0, 'se');
 smartbot.buildRoad(game, 3, 'e');
+
+const allOrientations = ['ne', 'e', 'se', 'sw', 'w', 'nw'];
 for (var i = 0; i < 19; i++) {
   console.log(`${i}:`);
   console.log(game.board.tiles[i]);

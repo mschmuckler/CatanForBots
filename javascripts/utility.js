@@ -186,11 +186,26 @@ module.exports = {
     }
   },
 
+  roadConnectsToRoad: (player, selectedTile, orientation) => {
+    let result = false;
+    module.exports.adjacentSides(selectedTile, orientation).forEach(side => {
+      if (side && side.owner === player) { result = true }
+    });
+    return result;
+  },
+
   minimumCornerDistance: (selectedTile, orientation) => {
     let result = true;
     module.exports.adjacentCorners(selectedTile, orientation).forEach(corner => {
       if (corner) { result = false }
     });
+    return result;
+  },
+
+  roadDoesNotIntersectStructure: (otherPlayers, selectedTile, orientation) => {
+    let result = false;
+    // using adjacentSides(), check each CORNER BETWEEN CONNECTING ROADS, then
+    // if any corner does NOT have an enemy structure => result true.
     return result;
   },
 

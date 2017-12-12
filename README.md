@@ -9,21 +9,20 @@ To execute program, either run it in console with `node javascripts/game.js` or 
   - checkForVictory()
 
 ### player.js
-  - buildRoad()
-  - buildSettlement()
-  - buildCity()
+  - ~~buildRoad()~~
+  - ~~buildSettlement()~~
+  - ~~buildCity()~~
   - stealResource()
-  - offerTrade()
-  - playDevCardPhase()
-  - buyDevCardPhase()
-  - buildingPhase()
 
 ### rules.js
-  - validRoad()
-  - validSettlement()
-  - validCity()
+  - **validRoad()**
+    - Everything is done except for ensuring connection doesn't intersect with enemy structure (must validate that road doesn't pass through another player's structure). See `roadDoesNotIntersectStructure()` in utility.js
+  - ~~validSettlement()~~
+  - ~~validCity()~~
 
 ## Secondary Concerns:
+  - TRADING
   - Ports
   - Robber
   - Longest Road / Largest Army
+  - Discard on 7 roll

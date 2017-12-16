@@ -11,26 +11,32 @@ module.exports = class Board {
       'lumber', 'lumber', 'lumber', 'lumber',
       'wheat', 'wheat', 'wheat', 'wheat',
       'brick', 'brick', 'brick',
-      'ore', 'ore', 'ore',
+      'ore', 'ore', 'ore', 'desert'
     ];
     let diceNums = [
       12, 11, 10, 9, 8, 6, 5, 4, 3, 2,
-      11, 10, 9, 8, 6, 5, 4, 3,
+      11, 10, 9, 8, 6, 5, 4, 3, 7
     ];
     let tempResource, tempDiceNum;
     
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 19; i++) {
       tempResource = Math.round(Math.random() * (resources.length - 1));
       tempDiceNum = Math.round(Math.random() * (diceNums.length - 1));
+
+      if(resources[tempResource] === 'desert' || diceNums[tempDiceNum] === 7){
+        this.tiles[i] = new Tile('desert', 7)
+        resources.pop();
+        diceNums.pop();
+      }
+      else{
+        this.tiles[i] = new Tile(resources[tempResource], diceNums[tempDiceNum]);
+        
+        resources = resources.slice(0, tempResource).concat(resources.slice(tempResource + 1));
+        diceNums = diceNums.slice(0, tempDiceNum).concat(diceNums.slice(tempDiceNum + 1));
+      }
       
-      this.tiles[i] = new Tile(resources[tempResource], diceNums[tempDiceNum]);
-      
-      resources = resources.slice(0, tempResource).concat(resources.slice(tempResource + 1));
-      diceNums = diceNums.slice(0, tempResource).concat(diceNums.slice(tempResource + 1));
     }
     
-    // desert tile always last, need to fix
-    this.tiles[18] = new Tile('desert', 7);
   }
   
   // call after creating Tiles

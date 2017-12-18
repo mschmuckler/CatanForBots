@@ -8,6 +8,8 @@ class Game {
     this.board = new Board();
     this.players = players;
     this.currentPlayerIndex = 0;
+    this.largestArmy = null // eventually point to a player object
+    this.longestRoad = null // eventually point to a player object
   }
 
   setupBoard() {
@@ -52,7 +54,28 @@ class Game {
 
   rollDiceAndDistributeResources(){} // Need to implement
 
-  checkForVictory(){} // Need to implement
+  // if a player has 10 points or greater,
+  // the game is over
+  // we want to check if the current player has won after every turn
+  checkForVictory(){
+    return this.getPlayerTotalPoints(this.currentPlayer()) >= Rules.pointsRequiredToWin;
+  } 
+  
+  // get player's total points
+  // need to account for:
+  // number of settlements
+  // number of cities
+  // largest army
+  // longest road
+  // victory points
+  getPlayerTotalPoints(player) {
+    const settlementPoints = player.structures.filter(structure => structure instanceof Settlement).length;
+    const cityPoints = player.structures.filter(structure => structure instanceof City).length * 2;
+    const largestArmyPoints = this.largestArmy === player ? 2 : 0;
+    const longestRoadPoints = this.longestRoad === player ? 2 : 0;
+
+    return settlementPoints + cityPoints + largestArmyPoints + longestRoadPoints + player.revealedVP + player.hiddenVP;
+  }
 
   mainGameLoop() {
     let playerHasWon = false;

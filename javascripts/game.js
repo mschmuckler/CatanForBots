@@ -52,7 +52,43 @@ class Game {
     // Distribute initial resources
   }
 
-  rollDiceAndDistributeResources(){} // Need to implement
+  // here we want to roll 2 die (random # between 1 & 6)
+  // then get the tiles which are associated with the nums
+  // and distribute their resources to players accordingly
+  // distribute 1 per settlement
+  // distribute 2 per city
+  rollDiceAndDistributeResources(){
+    const diceNum1 = Math.floor((Math.random() * 6) + 1);
+    const diceNum2 = Math.floor((Math.random() * 6) + 1);
+    const roll = diceNum1 + diceNum2;
+
+    // don't do anything conventional if seven is rolled
+    if (roll === 7) {
+      this.handleSevenRolled();
+    } else {
+      const rolledTiles = this.board.tiles.filter(tile => tile.diceNum === role);
+
+      rolledTiles.forEach(tile => {
+        distributeResources(tile);
+      })
+    }
+
+  }
+
+  // distribute resources
+  // here we want to push resources to a players hand if they are occupying a tile
+  // give them n resources of the tile resource type based on the player's structure type
+  distributeResources(tile) {
+    console.log('distibute resources based on occupation');
+  }
+
+  // handle sevens being rolled
+  // players with > 7 cards need to discard half their resources of their choosing
+  // current player moves the robber
+  // and steals a resource at random from a player that is occupying the new robber space
+  handleSevenRolled() {
+    console.log('seven rolled');
+  }
 
   // if a player has 10 points or greater,
   // the game is over

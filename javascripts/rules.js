@@ -1,6 +1,8 @@
 const Utility = require('./utility.js');
 
 module.exports = {
+  pointsRequiredToWin: 10,
+
   validRoad: ()=>{}, // Connects with settlement/road, doesn't go through other player structures
 
   validSettlement: (player, selectedTile, orientation) => {

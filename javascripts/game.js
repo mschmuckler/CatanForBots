@@ -8,6 +8,8 @@ class Game {
     this.board = new Board();
     this.players = players;
     this.currentPlayerIndex = 0;
+    this.largestArmy = null // eventually point to a player object
+    this.longestRoad = null // eventually point to a player object
   }
 
   setupBoard() {
@@ -50,9 +52,66 @@ class Game {
     // Distribute initial resources
   }
 
-  rollDiceAndDistributeResources(){} // Need to implement
+  // here we want to roll 2 die (random # between 1 & 6)
+  // then get the tiles which are associated with the nums
+  // and distribute their resources to players accordingly
+  // distribute 1 per settlement
+  // distribute 2 per city
+  rollDiceAndDistributeResources(){
+    const diceNum1 = Math.floor((Math.random() * 6) + 1);
+    const diceNum2 = Math.floor((Math.random() * 6) + 1);
+    const roll = diceNum1 + diceNum2;
 
-  checkForVictory(){} // Need to implement
+    // don't do anything conventional if seven is rolled
+    if (roll === 7) {
+      this.handleSevenRolled();
+    } else {
+      const rolledTiles = this.board.tiles.filter(tile => tile.diceNum === role);
+
+      rolledTiles.forEach(tile => {
+        distributeResources(tile);
+      })
+    }
+
+  }
+
+  // distribute resources
+  // here we want to push resources to a players hand if they are occupying a tile
+  // give them n resources of the tile resource type based on the player's structure type
+  distributeResources(tile) {
+    console.log('distibute resources based on occupation');
+  }
+
+  // handle sevens being rolled
+  // players with > 7 cards need to discard half their resources of their choosing
+  // current player moves the robber
+  // and steals a resource at random from a player that is occupying the new robber space
+  handleSevenRolled() {
+    console.log('seven rolled');
+  }
+
+  // if a player has 10 points or greater,
+  // the game is over
+  // we want to check if the current player has won after every turn
+  checkForVictory(){
+    return this.getPlayerTotalPoints(this.currentPlayer()) >= Rules.pointsRequiredToWin;
+  } 
+  
+  // get player's total points
+  // need to account for:
+  // number of settlements
+  // number of cities
+  // largest army
+  // longest road
+  // victory points
+  getPlayerTotalPoints(player) {
+    const settlementPoints = player.structures.filter(structure => structure instanceof Settlement).length;
+    const cityPoints = player.structures.filter(structure => structure instanceof City).length * 2;
+    const largestArmyPoints = this.largestArmy === player ? 2 : 0;
+    const longestRoadPoints = this.longestRoad === player ? 2 : 0;
+
+    return settlementPoints + cityPoints + largestArmyPoints + longestRoadPoints + player.revealedVP + player.hiddenVP;
+  }
 
   mainGameLoop() {
     let playerHasWon = false;
